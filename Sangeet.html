@@ -1,0 +1,1094 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="hyper.png" type="image/x-icon">
+    <title>SANGEET</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+
+    <style>
+        :root {
+            --aqua: aqua;
+        }
+
+        * {
+
+            user-select: none;
+            transition: 0.5s;
+            scroll-behavior: smooth;
+            cursor: pointer;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            cursor:auto;
+
+
+        }
+
+        body {
+
+            background:
+                linear-gradient(270deg, var(--aqua), black);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            cursor: auto;
+
+        }
+
+        .main_bar {
+            height: 10vh;
+            width: 100vw;
+            background-color: black;
+            position: fixed;
+            top: 0;
+            border-bottom: 2px solid var(--aqua);
+            border-top: 2px solid var(--aqua);
+            display: flex;
+            align-items: center;
+            z-index: 100000;
+            cursor: auto;
+        }
+
+        .task_bar {
+            width: 100vw;
+            height: 10vh;
+            background-color: black;
+            position: fixed;
+            bottom: 0;
+            border-bottom: 2px solid var(--aqua);
+            border-top: 2px solid var(--aqua);
+            display: flex;
+            z-index: 1000000;
+            align-items: center;
+            justify-content: space-between;
+            cursor: auto;
+
+        }
+
+        #home,
+        #song,
+        #search,
+        #lucklist,
+        #hyper {
+            color: var(--aqua);
+            font-size: 3.5vh;
+            cursor: pointer;
+            padding: 2.5vh 1em;
+
+        }
+
+        .main_bar #list {
+            font-size: 5vh;
+            margin-right: auto;
+            color: var(--aqua);
+            margin-left: 1vw;
+            /* padding:2.5vh 0.5em;*/
+            cursor: pointer;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        #home,
+        #song:hover,
+        #search:hover,
+        #lucklist:hover,
+        #hyper:hover {
+            color: black;
+            background-color: var(--aqua);
+            text-align: center;
+
+
+
+        }
+
+        #co_name {
+            color: var(--aqua);
+            margin-right: auto;
+            margin-left: -1vw;
+            font-size: 7.5vh;
+            font-family: "Audiowide", sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+
+        }
+
+        #env {
+            font-size: 6vh;
+            margin-left: auto;
+            color: var(--aqua);
+            text-align: center;
+            margin-right: 1vw;
+            cursor: pointer;
+            width: 6vw;
+        }
+
+        /* #choose {
+      position: fixed;
+      right: 1vw;
+      top: 2vh;
+      width: 7vw;
+      height: 7vh;
+      background-color: var(--aqua);
+      opacity: 0;
+      border-radius: 50%;
+      cursor: pointer;
+    }*/
+
+        #list_box {
+            width: 30vw;
+            height: 80vh;
+            position: fixed;
+            top: 10vh;
+            background-color: var(--aqua);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 10000;
+            border-right: 2px solid black;
+            border-left: 2px solid black;
+            transition: 0.5s;
+            margin-left: -30vw;
+            cursor: auto;
+        }
+
+        #list_box button {
+            width: 90%;
+            height: 5vh;
+            background-color: black;
+            color: var(--aqua);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5vh;
+            font-family: "Audiowide", sans-serif;
+            cursor: pointer;
+            border: 2px solid var(--aqua);
+            display: flex;
+            font-weight: bold;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        #list_box button:hover {
+            color: black;
+            background-color: var(--aqua);
+            border: 2px solid black;
+        }
+
+        #list_box button a {
+            color: var(--aqua);
+            text-decoration: none;
+        }
+
+        #list_box button:hover a {
+            color: black;
+        }
+
+        #list_box button:nth-child(1) {
+            color: black;
+            background-color: var(--aqua);
+            border: 2px solid black;
+
+        }
+
+        #co_name img {
+            width: 9vh;
+            height: 9vh;
+            margin-bottom: -2.5vh;
+            border-radius: 50%;
+            filter: saturate(500);
+            border: 2px solid var(--aqua);
+
+        }
+
+        .Audios {
+            z-index: 1;
+            width: 50vw;
+            height: 9vh;
+            background-color: transparent;
+            border: 2px solid var(--aqua);
+            border-radius: 10px;
+            margin-top: 1.5vh;
+            cursor: pointer;
+            margin-left: 5vw;
+
+
+        }
+
+        .Audios::after {
+            content:"#";
+            width: 10vw;
+            height: 9vh;
+            background-color: var(--aqua);
+            position: absolute;
+            border: 2px solid black;
+            border-radius: 10px;
+            margin-top: -3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5vh;
+            font-family: "Audiowide", sans-serif;
+
+        }
+
+        .Audios:hover {
+            background-color: black;
+            border: 2px solid var(--aqua);
+            box-shadow: 0px 0px 5px 5px black;
+        }
+
+        .home_div {
+            width: 100vw;
+            height: 80vh;
+
+            background-color: transparent;
+            border-radius: 10px;
+            position: fixed;
+            margin-top: 10vh;
+            overflow: auto;
+            /*   display: none; */
+
+        }
+
+        .music_div {
+            width: 100vw;
+            height: 80vh;
+            background-color: transparent;
+            /* border: 5px solid var(--aqua); */
+            margin: auto;
+            border-radius: 10px;
+            position: fixed;
+            /*  display: flex;
+    
+    flex-direction: column;
+   top:10vh;
+    align-items: center;
+  justify-content:center;*/
+            top: 10vh;
+            display: none;
+            overflow: auto;
+            display: none;
+        }
+
+        .wishlist_div {
+            width: 100vw;
+            height: 80vh;
+            background-color: transparent;
+            border-radius: 10px;
+            position: fixed;
+            margin-top: 10vh;
+            overflow: auto;
+
+            display: none;
+        }
+
+        .hyper_div {
+            width: 100vw;
+            height: 80vh;
+            background-color: transparent;
+            /* border: 5px solid var(--aqua); */
+
+            border-radius: 10px;
+            display: block;
+            position: fixed;
+            overflow: auto;
+            top: 10vh;
+            /*flex-direction: column;
+   top:10vh;
+    align-items: center;*/
+            display: none;
+        }
+
+        #music_under,
+        #under_hyper {
+            width: 80vw;
+            height: 50vh;
+            background: black;
+            opacity: 0.9;
+            border-radius: 1vh;
+            border: 2.5px solid var(--aqua);
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: auto;
+
+        }
+
+        #music_under:hover,
+        #under_hyper:hover {
+            box-shadow: 0px 0px 11px 11px var(--aqua), 0px 0px 11px 11px black;
+        }
+        #music_under:hover img{
+            width:25vh;
+            height:25vh;
+            box-shadow:0 0 15px 15px black;
+        }
+        #music_under{
+            background-image: url("https://source.unsplash.com/random/550x550/?nature");
+            
+        }
+
+        #search_div,
+        #search_Wishlist {
+            display: block;
+            width: 100vw;
+            height: 10vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ::-webkit-input-placeholder {
+            color: var(--aqua);
+        }
+
+        #search_div input,
+        #search_Wishlist input {
+            width: 70vw;
+            height: 7.5vh;
+            outline-color: var(--aqua);
+            background-color: black;
+            color: var(--aqua);
+            font-family: "Audiowide", sans-serif;
+            text-align: center;
+            border: 1px solid var(--aqua);
+            border-radius: 10px;
+            box-shadow: 0 0 5px 5px black;
+            font-size: 3.5vh;
+
+        }
+
+        #bg {
+            width: 100vw;
+            height: 80vh;
+            position: fixed;
+            top: 10vh;
+            z-index: -10;
+        }
+
+        h1,
+        h3 {
+            text-align: center;
+            font-family: "Audiowide", sans-serif;
+            background-color: var(--aqua);
+            user-select: none;
+            box-shadow: 0 0 5px 5px black;
+            font-size: 7vh;
+        }
+
+        #under_Home,
+        #under_Wishlist {
+
+            width: 100vw;
+            height: auto-fit;
+            margin-bottom: 50vh;
+        }
+
+        h3 {
+            background-color: transparent;
+            line-height: 60vh;
+            vertical-align: center;
+            font-size: 5vh;
+            text-shadow: 2px 2px var(--aqua);
+
+        }
+
+        #footer,
+        #footer div a {
+
+
+            font-family: "Audiowide", sans-serif;
+            text-decoration: none;
+            font-size: 2vh;
+            text-align: center;
+            background-color: black;
+            color: aqua;
+            padding: 10vh 0;
+        }
+
+        #footer div a {
+            background-color: transparent;
+        }
+
+        #footer img {
+            width: 9vh;
+            height: 9vh;
+        }
+
+        #play_Pause,#add_Wish,#backward_One,#forward_One {
+            color: var(--aqua);
+            background-color: transparent;
+            border: none;
+            background-color: black;    
+            width: 8vh;
+            height: 8vh;
+            border-radius: 50%;
+            margin-bottom: 0.5vh;
+            font-size: 6vh;
+        }
+        .divo_music{
+            display:flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-top: auto;
+            width: 80%;
+        }
+
+        #music_Range {
+            -webkit-appearance: none;
+            width: 75%;
+            margin-top: auto;
+            height: 1vh;
+            background-color: var(--aqua);
+            margin-bottom: -15vh;
+            box-shadow: 0 0 5px 5px black;
+            border-radius: 5px;
+        }
+
+        #music_Range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background-color: var(--aqua);
+            box-shadow: 0 0 1px 1px black;
+            border: 3px solid black;
+            width: 2vh;
+            rotate: 45deg;
+            height: 2vh;
+        }
+
+        #music_Timer {
+            color: var(--aqua);
+            margin-top: auto;
+            margin-bottom: -3vh;
+            font-family: "Audiowide", sans-serif;
+            box-shadow: 0 0 10px 10px var(--aqua);
+            background-color: black;
+            border-radius: 2px;
+            
+        }
+        #music_under img{
+            width:30vh;
+            height:30vh;
+            filter: saturate(500);
+            border: 5px solid var(--aqua);
+            border-radius: 10px;
+            transition: 1.5s;
+            box-shadow: 0px 0px 5px 5px black;
+        }
+        #under_hyper #purchase{
+            background-color: black;
+            color: var(--aqua);
+            box-shadow: 0 0 5px 5px aqua;
+            border-radius: 10px;
+            font-family: "Audiowide", sans-serif;
+            font-size: 5vh;
+            margin-top: auto;
+            border: 2.5px solid black;
+            position: absolute;
+            bottom: 8vh;
+        }
+        #under_hyper #purchase:hover{
+            background-color:var(--aqua);
+            color: black;
+            
+        }
+        #under_hyper h4{
+            color: aqua;
+            text-shadow: 2px 2px  1px deeppink;
+            font-family: "Audiowide", sans-serif;
+            font-size: 3.5vh;
+            z-index: 10;
+            font-weight: bolder;
+           
+        }
+        #hyper_img{
+            width:50vh;
+            height:50vh;
+            border-radius: 50%;
+            position: absolute;
+            filter: contrast(50);
+            border: 5px solid var(--aqua);
+            opacity: 0.6;
+           
+        }
+        .Audios p{
+            font-family: "Audiowide", sans-serif;
+            color: var(--aqua);
+            position: absolute;
+            margin-left: 12vw;
+       background-color: black;
+          
+            border-radius: 5px;
+            font-size: 2.3vh;
+        }
+        
+        #music_under h5{
+        font-family: "Audiowide", sans-serif;
+            color: var(--aqua);
+            
+            position:absolute;
+            margin-bottom:-2.5vh;
+            background-color: black;
+            border-radius: 5px;
+            font-size: 2.3vh;
+        
+        }        
+                        
+                                        /* portability */
+/*PORTABILITY*/
+    /*Phone Media query*/
+    @media (min-width:320px) and (max-width:480px) {
+          
+         .Audios{
+            width: 90vw;
+         }
+       
+        }
+
+        /* Tablet/pads Media Query */
+        @media (min-width:480px) and (max-width:768px) {
+        
+              
+       
+              
+        }
+
+        /* Laptop/desktop Media Query  */
+        @media (min-width:768px) {
+         
+          
+               }
+             
+
+    </style>
+</head>
+
+<body>
+    <img src="song.gif" id="bg">
+    <div class="main_bar">
+        <i class="fa fa-list" id="list" title="list_bar"></i>
+        <p id="co_name">ସଙ୍ଗୀତ<img src="hearing.gif"></p>
+        <!--<input type="color" id="choose">-->
+        <i class="fa fa-lightbulb-o" id="env" title="mode"></i>
+
+    </div>
+    <div id="list_box">
+        <button onclick="Choice(1);" id="homel"><i class="fa fa-home"></i>HOME</button>
+        <button onclick="Choice(2);" id="songl"><i class="fa fa-music"></i>MUSICS</button>
+        <button onclick="Choice(5);"><i class="fa fa-search"></i> SEARCH</button>
+        <button onclick="Choice(3);" id="lucklistl"><i class="fa fa-heart"></i> WISHLIST</button>
+        <button onclick="Choice(4);" id="hyperl"><i class="fa fa-bolt"></i>HYPER</button>
+        <button><i class="fa fa-youtube"></i><a href="#footer">FOLLOW</a></button>
+        <button><i class="fa fa-question"></i>FEEDBACK</button>
+        <button><i class="fa fa-rupee"></i>DONATE</button>
+        <button><i class="fa fa-book"></i>LANGUAGE</button>
+    </div>
+
+    <div class="task_bar">
+        <i class="fa fa-home" id="home" title="home" onclick="Choice(1);"></i>
+        <i class="fa fa-music" id="song" title="music" onclick="Choice(2);"></i>
+        <i class="fa fa-search" id="search" title="search" onclick="Choice(5);"></i>
+        <i class="fa fa-heart" id="lucklist" title="wishlist" onclick="Choice(3);"></i>
+        <i class="fa fa-bolt" id="hyper" title="hyper" onclick="Choice(4);"></i>
+
+    </div>
+    <main>
+        <div class="home_div">
+            <h1>HOME</h1>
+            <div id="search_div">
+                <input type="text" placeholder="Search Here...">
+            </div>
+            <div id="under_Home">
+               
+            </div>
+
+
+            <footer id="footer">
+                <div>
+
+                    <h5>© All Copyright Reserved By Rx_LegenT_09x.co </h5>
+                    <a href="https://www.facebook.com/smart.singham.14" target="_blank"> <img src="https://i.stack.imgur.com/bMHyB.png"/></a>
+
+                    <a href="https://www.facebook.com/smart.singham.14" target="_blank"> <img src="https://i.stack.imgur.com/HZYnI.png"/></a>
+
+                    <a href="https://www.facebook.com/smart.singham.14" target="_blank"> <img src="https://i.stack.imgur.com/OW7dd.png"/></a>
+
+                    <a href="https://www.facebook.com/smart.singham.14" target="_blank"> <img src="https://i.stack.imgur.com/pm2Pf.png"/></a>
+
+                    <a href="https://www.facebook.com/smart.singham.14" target="_blank"> <img src="https://i.stack.imgur.com/KFuIQ.png"/></a>
+                    <br>
+                    <a href="#"># Agreed With All Privacy Policy And Terms & Conditions !</a>
+                </div>
+            </footer>
+
+
+
+        </div>
+
+
+        <div class="music_div">
+            <h1> MUSIC</h1>
+            <div id="music_under">
+                <img src="hearing.gif">
+                <h5>TITLE : <span id="title_song">rolex.mp3</span></h5>
+                <input type="range" value="0" min="0" max="100" id="music_Range">
+                <p id="music_Timer">00:00/00:00</p>
+                <div class="divo_music">
+                    <button id="backward_One" onclick="Backward();"><i class="fa fa-backward"></i></button>
+                <button id="play_Pause"><i class="fa fa-play"></i></button>
+                <button id="backward_One" onclick="Forward();"><i class="fa fa-forward"></i></button>
+<button id="add_Wish"><i class="fa fa-heart" onclick="add_WishList();"></i></button>
+            </div>
+            </div>
+
+        </div>
+
+        <div class="wishlist_div">
+            <h1>WISHLIST</h1>
+            <div id="search_Wishlist">
+                <input type="text" placeholder="Search Here..." style="margin:auto;">
+            </div>
+            <div id="under_Wishlist">
+                <h3 id="nothing_div" style="text-align:center;">
+                    NOTHING...</h3>
+            </div>
+        </div>
+        <div class="hyper_div">
+            <h1>HYPER</h1>
+            
+            <div id="under_hyper">
+                <img src="hyper.png" id="hyper_img">
+                <h4>Purchase The Hyper Subscription Plan For Batter Performance And Enhance Your Music Listening Quality On Sangeet ... Keep Listening Us... 
+                 </h4>
+            <button id="purchase">PURCHASE</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        //ସଂଗୀତ
+        let bg_Color = "aqua";
+
+        let list = document.getElementById("list");
+        let list_box = document.getElementById("list_box");
+        //end of env_mode
+        //began of slidebar
+        const slide = () => {
+
+            if (list.style.transform == "rotate(180deg)") {
+                list_box.style.marginLeft = "-30vw";
+
+                list.style.transform = "rotate(0deg)";
+            }
+            else {
+                list_box.style.marginLeft = "0vw";
+
+                list.style.transform = "rotate(180deg)";
+            }
+        }
+        list.onclick = slide;
+        //end of scrollbar
+        //play Music Function Creating ...
+        //the songs array use for adding songs
+        let songs=["rolex.mp3","bantai.mp3","divine.mp3","pika.mp3","bombay to Punjab.mp3","divine 3_59 am.mp3","kaam 25.mp3","satya he divine.mp3"];
+        let url="rolex.mp3";
+        let audio=new Audio(url);let num=0;
+        const play_Music=(num)=>{
+        
+        audio.pause();
+        url=songs[+num];
+        
+        Choice(2);
+      audio=new Audio(url);
+      
+      play_Pause.innerHTML=`<i class="fa fa-play"></i>`;
+        setInterval(()=>{
+    let Min="00";
+    let Sec="00";
+    let Tottal="";
+    
+    
+    if(audio.duration<60){
+        //less than 60 only second work 
+        Min="00";
+        Sec=(Number.parseInt(audio.currentTime)<10)?"0"+Number.parseInt(audio.currentTime):Number.parseInt(audio.currentTime);
+        Tottal="00:"+((Number.parseInt(audio.duration)<10)?"0"+parseInt(audio.duration):parseInt(audio.duration));
+    }
+    else{
+        //grater than or equal 60 min and second both...
+        Tottal="0"+Number.parseInt(audio.duration/60)+":"+((audio.duration%60<10)?"0"+Number.parseInt(audio.duration%60):Number.parseInt(audio.duration%60));
+        if(audio.currentTime<60){
+            Min="00";
+            Sec=((audio.currentTime<10)?"0"+Number.parseInt(audio.currentTime):Number.parseInt(audio.currentTime));
+        }
+        else{
+           Min=Number.parseInt(audio.currentTime/60)<10?`0${Number.parseInt(audio.currentTime/60)}`:`${Number.parseInt(audio.currentTime/60)}`;
+           
+           Sec=Number.parseInt(audio.currentTime%60)<10?`0${Number.parseInt(audio.currentTime%60)}`:Number.parseInt(audio.currentTime%60);
+        }
+
+    }
+
+    
+    music_Timer.innerText=`${Min}:${Sec}/${Tottal}`;
+    music_Range.value=(audio.currentTime/audio.duration)*100;
+    if(audio.currentTime==audio.duration){
+        play_Pause.innerHTML=`<i class="fa fa-pause"></i>`;
+        audio.pause();
+        audio.currentTime=0;
+      num++;
+      if(num==songs.length){
+      num=0;
+      }
+        url=songs[num];
+        audio=new Audio(url);
+        audio.play();
+        
+    }
+},1);
+        
+        
+        }
+                setInterval(()=>{
+    let Min="00";
+    let Sec="00";
+    let Tottal="";
+    title_song.innerText=url;
+    if(audio.duration<60){
+        //less than 60 only second work 
+        Min="00";
+        Sec=(Number.parseInt(audio.currentTime)<10)?"0"+Number.parseInt(audio.currentTime):Number.parseInt(audio.currentTime);
+        Tottal="00:"+((Number.parseInt(audio.duration)<10)?"0"+parseInt(audio.duration):parseInt(audio.duration));
+    }
+    else{
+        //grater than or equal 60 min and second both...
+        Tottal="0"+Number.parseInt(audio.duration/60)+":"+((audio.duration%60<10)?"0"+Number.parseInt(audio.duration%60):Number.parseInt(audio.duration%60));
+        if(audio.currentTime<60){
+            Min="00";
+            Sec=((audio.currentTime<10)?"0"+Number.parseInt(audio.currentTime):Number.parseInt(audio.currentTime));;
+        }
+        else{
+           Min=Number.parseInt(audio.currentTime/60)<10?`0${Number.parseInt(audio.currentTime/60)}`:`${Number.parseInt(audio.currentTime/60)}`;
+           
+           Sec=Number.parseInt(audio.currentTime%60)<10?`0${Number.parseInt(audio.currentTime%60)}`:Number.parseInt(audio.currentTime%60);
+        }
+
+    }
+
+    
+    music_Timer.innerText=`${Min}:${Sec}/${Tottal}`;
+    music_Range.value=(audio.currentTime/audio.duration)*100;
+    if(audio.currentTime==audio.duration){
+        play_Pause.innerHTML=`<i class="fa fa-pause"></i>`;
+         audio.pause();
+        audio.currentTime=0;
+         num++;
+         if(num==songs.length){
+      num=0;
+      }
+        url=songs[num];
+        audio=new Audio(url);
+        audio.play(); 
+        
+    }
+},1);
+     
+        
+        //music_range on-input
+//forwarding the song 
+const Forward=()=>{
+ play_Pause.innerHTML=`<i class="fa fa-pause"></i>`;
+         audio.pause();
+        audio.currentTime=0;
+         num++;
+         if(num==songs.length){
+      num=0;
+      }
+        url=songs[num];
+        audio=new Audio(url);
+        audio.play(); 
+        
+
+}
+
+
+//backwarding the song 
+const Backward=()=>{
+ play_Pause.innerHTML=`<i class="fa fa-pause"></i>`;
+         audio.pause();
+        audio.currentTime=0;
+         num--;
+         if(num==songs.length){
+      num=0;
+      }
+      if(num<0){
+      num=0;
+      }
+        url=songs[num];
+        audio=new Audio(url);
+        audio.play(); 
+        
+
+}
+
+
+
+// music_Range.oninput=()=>{
+    
+   
+// }
+play_Pause.onclick=()=>{
+if(audio.playing){
+audio.pause();
+play_Pause.innerHTML=`<i class="fa fa-play"></i>`;
+}
+    if(play_Pause.innerHTML==`<i class="fa fa-pause"></i>`){
+        play_Pause.innerHTML=`<i class="fa fa-play"></i>`;
+        audio.pause();
+      
+    }
+    else{
+        play_Pause.innerHTML=`<i class="fa fa-pause"></i>`;
+        audio.play();
+       
+    }
+}
+music_Range.oninput=()=>{
+    audio.currentTime=(audio.duration*music_Range.value)/100;
+    if(audio.currentTime==audio.duration){
+        play_Pause.innerHTML=`<i class="fa fa-play"></i>`;
+        audio.currentTime=0;
+        audio.pause();
+    }
+}
+        //function closing & opening slidebar while tap on main
+        const close = () => {
+            list_box.style.marginLeft = "-30vw";
+
+            list.style.transform = "rotate(0deg)";
+        }
+        let main = document.getElementsByTagName("main");
+        for (let i = 0; i < main.length; i++) {
+            main[i].onclick = close;
+            main[i].ondblclick = slide;
+        }
+        // console.log(main.length);
+        //function for choice sub-app
+        let home_Div = document.getElementsByClassName("home_div")[0];
+        let music_Div = document.getElementsByClassName("music_div")[0];
+        let wishlist_Div = document.getElementsByClassName("wishlist_div")[0];
+        let hyper_Div = document.getElementsByClassName("hyper_div")[0];
+
+        let sub_Apps = [home_Div, music_Div, wishlist_Div, hyper_Div];
+
+
+        const allHideOneSee = (yo) => {
+            yo = Number.parseInt(yo);
+            for (let i = 0; i < 4; i++) {
+                sub_Apps[i].style.display = "none";
+                if (yo == i) {
+                    sub_Apps[yo].style.display = "block";
+                }
+            }
+
+        }
+        let sub_Icons = [home, song, lucklist, hyper];
+        let list_Apps = [homel, songl, lucklistl, hyperl];
+
+        const allFadeOneColor = (yo) => {
+            yo = Number.parseInt(yo);
+            for (let i = 0; i < 4; i++) {
+                sub_Icons[i].style.color = bg_Color;
+                sub_Icons[i].style.backgroundColor = "black";
+                list_Apps[i].style.color = bg_Color;
+                list_Apps[i].style.backgroundColor = "black";
+                list_Apps[i].style.border = `2px solid black`;
+                if (i == yo) {
+                    sub_Icons[i].style.color = "black";
+                    sub_Icons[i].style.backgroundColor = bg_Color;
+                    list_Apps[i].style.color = "black";
+                    list_Apps[i].style.backgroundColor = bg_Color;
+                    list_Apps[i].style.border = `2px solid black`;
+                }
+            }
+        }
+        const Choice = (x) => {
+            x = Number.parseInt(x);
+            if (x == 1) {
+
+
+                allHideOneSee(x - 1);
+                allFadeOneColor(x - 1);
+                search_div.style.display = "none";
+
+
+            }
+            else if (x == 2) {
+
+
+                allHideOneSee(x - 1);
+                allFadeOneColor(x - 1);
+
+
+            }
+
+            else if (x == 3) {
+
+
+                allHideOneSee(x - 1);
+                allFadeOneColor(x - 1);
+
+
+            }
+            else if (x == 4) {
+                allHideOneSee(x - 1);
+                allFadeOneColor(x - 1);
+
+            }
+            else if (x == 5) {
+
+                allHideOneSee(0);
+                allFadeOneColor(0);
+                if (search_div.style.display == "flex") {
+                    search_div.style.display = "none";
+                    search_Wishlist.style.display = "none";
+                }
+                else {
+                    search_div.style.display = "flex";
+                    search_Wishlist.style.display = "flex";
+                }
+
+            }
+
+
+        }
+        //hover activance after ...
+        // for (let i = 0; i < 4; i++) {
+        //   sub_Icons[i].onmouseover = () => {
+
+        //     sub_Icons[i].style.backgroundColor = "black";
+        //     sub_Icons[i].style.color = bg_Color;
+        //   }
+        // }
+        // for (let i = 0; i < 4; i++) {
+        //   list_Apps[i].onmouseover = () => {
+        //     list_Apps[i].style.color = "black";
+        //     list_Apps[i].style.backgroundColor = bg_Color;
+        //     list_Apps[i].border = `2px solid black`;
+        //   }
+        // }
+        //co_name change 1.5 second each .... 
+        let diff_Lang = ["ସଙ୍ଗୀତ", "Sangeet", "संगीत", "సంగీత్", "சங்கீத்", "সঙ্গীত", "ಸಂಗೀತ", "سنگیت", "સંગીત", "സംഗീതം", "संगीतम"];
+        let TMP = 0;
+        setInterval(() => {
+            if (TMP == 11) {
+                TMP = 0;
+            }
+            co_name.innerHTML = `${diff_Lang[TMP]}<img src="hearing.gif">`;
+            TMP++;
+        }, 1500);
+ //alert(co_name.innerHTML);
+
+
+//purchase text aniamtion
+let h4=document.getElementsByTagName("h4")[0];
+let text_Hyper=h4.innerText;
+let _temp_=0;
+setInterval(()=>{
+
+h4.innerText=`${text_Hyper.substring(0,_temp_)}`;
+
+if(_temp_==text_Hyper.length-1){
+    _temp_=0;
+  
+}
+_temp_++;
+},100);
+//Add Music on Home ....
+
+for(let i=0; i<songs.length; i++){
+
+ under_Home.innerHTML+=`<div class="Audios" onclick="play_Music(${i});">
+                    <p>TITLE : <span id="song_title">${songs[i]}</span></p>
+                </div>
+                `; 
+
+}
+
+window.localStorage.setItem("wishlist_container","");
+document.cookie="count=1";
+if(document.cookie.split("=")[1]==1){
+window.localStorage.setItem("wishlist_container","");
+}
+document.cookie="count=0";
+let wish="";
+let wish_Arr=[];
+/*const add_WishList=()=>
+{
+let k=0;
+wish=title_song.innerText;
+for(let i=0; i<wish_Arr; i++){
+    if(wish_Arr[i]!=wish){
+        k++;
+    }
+    else{
+        k--;
+    }
+    
+}
+if(k==wish_Arr.length){
+       wish_Arr= wish_Arr.push(wish);
+    
+    }
+    else{
+         wish_Arr= wish_Arr.push(wish);
+    }
+let nothing_div=document.getElementById("nothing_div");
+window.localStorage.setItem("wishlist_container",""+wish_Arr); 
+//console.log("You",wish_Arr);
+    if(wish_Arr.length==0){
+        //   under_Wishlist.innerHTML="";
+    nothing_div.style.display="block";
+   
+    }
+    else{
+        nothing_div.style.display="none";
+       
+  
+    }
+//under_Wishlist.innerHTML="";
+for(let i=0; i<wish_Arr.length; i++){
+
+under_Wishlist.innerHTML+=`<div class="Audios" onclick="play_Music(${songs.indexOf(wish_Arr[i])});">
+                    <p>TITLE : <span id="song_title">${wish_Arr[i]}</span></p>
+                </div>
+                `; 
+    
+
+}
+
+//set wishlist on wishlist div
+
+}
+
+*/
+//owner address
+localStorage.setItem("Owner","Rx_LegenT_09x.co");
+localStorage.setItem("Name","SANGEET");
+
+    </script>
+</body>
+
+</html>
